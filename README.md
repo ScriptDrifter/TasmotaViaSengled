@@ -176,7 +176,7 @@ Start by desoldering and removing the leads from the Sengled PCB - you can just 
 
 ### Re-solder the Capacitor Back On
 
-Feed the two capacitor leads in to the through-holes from earlier, and resolder them back in place. **Please note, the capacitor appears to be polarized so we must install it in the same orientation as we removed it, with the black arrows facing outwards towards the antenna/where the LED PCB would be installed.
+Feed the two capacitor leads in to the through-holes from earlier, and resolder them back in place. **Please note, the capacitor appears to be polarized so we must install it in the same orientation as we removed it, with the black arrows facing outwards towards the antenna/where the LED PCB would be installed.**
 
 <img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/21%20-%20Resolder%20cap.JPG?raw=true" width=50% height=50% align="center">
 
