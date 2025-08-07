@@ -241,3 +241,8 @@ Press enter, and you should now have a white light control bar on the homepage.
 <img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/31%20-%20WWhite%20bar.PNG?raw=true" width=50% height=50% align="center">
 
 # Additional Resources
+
+- [Tasmota Homepage](https://tasmota.github.io/)
+- [Tasmotizer Flashing Tool](https://github.com/tasmota/tasmotizer)
+- [Additional Tasmota Commands](https://tasmota.github.io/docs/Commands/)
+- [Getting Started with Tasmota in Home Assistant – Local Bytes](https://blog.mylocalbytes.com/kb/2022-10-01/getting-started-with-tasmota/) – A great step-by-step guide to integrating MQTT and Tasmota with Home Assistant.
