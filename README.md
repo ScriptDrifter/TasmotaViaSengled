@@ -130,5 +130,109 @@ TX   ->  TX
 
 ### Flashing using a USB to UART adapter
 
-If you are using a USB to UART cable, the connection process is pretty straightfoward following the pinout diagram above - **just make sure your adapter supports 3.3V logic output and not 5V, if using 5V, you will need to use a level shifter!** However, 
+If you are using a USB to UART cable, the connection process is pretty straightfoward following the pinout diagram above - **just make sure your adapter supports 3.3V logic output and not 5V, if using 5V, you will need to use a level shifter!**
 
+After connecting your Sengled PCB to your adapter, you may begin the flashing process. I won't go to in depth on how to actually flash Tasmota as there are many other, much better guides to doing this but in my experience, downloading the Tasmotizer GUI interface was by far the easiest to work with.
+
+You can find more information and download the application here: https://github.com/tasmota/tasmotizertab=readme-ov-file#installation-and-how-to-run
+
+_The ESP8266 supports tamota.bin and you do not need to use tasmota-lite.bin_
+
+Once the reading, erasing, and flashing is complete, you should be prompted with the following screen - you now have Tasmota installed to your bulb and you can begin the reassembly process!
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/19%20-%20Tasmo%20push.PNG?raw=true" width=50% height=50% align="center">
+
+### Flashing using an ESP32 _dev board_
+
+If you do not have a USB to UART serial adapter laying around (me), you can use an ESP32 dev board for the flashing process as well - the important part is that it is a dev board. Dev boards use the ESP32 chipset, but come with the pins pre-soldered and have other integrated electronics already in place - the easiest giveway to tell if your ESP32 is a dev board is that it will have some kinda of micro-USB or USB-C to plug in to your computer.
+
+ESP32 dev boards already have the USB to UART controller built into the board, and we just need to bypass the ESP chip to use the serial communicator already built in. In order to do this, the easiest way is to identify if you have an "EN" pin already accessible on your board. If so, follow the the pinout below for wiring:
+
+3V3  ->  3V
+<br>
+GND  ->  GND
+<br>
+**EN -> GND**
+<br>
+IO0  ->  GND
+<br>
+RX   ->  RX (may be be labeled RX0 on your board)
+<br>
+TX   ->  TX (may be be labeled TX0 on your board)
+<br>
+
+Connect your dev board via USB to your computer once wired, and follow the same intructions above for flashing.
+
+# Reassembling the bulb
+Assuming flashing Tasmota via your install method of choice went smoothly, the hard part is over! All that's left to do is disconnect your leads from the board, and repeat the steps we used to take apart the board but - _in reverse_ :)
+
+### Removing the leads
+Start by desoldering and removing the leads from the Sengled PCB - you can just heat up the solder and pull the wire off, leaving the beads we made earlier on the board still leave plenty of clearance for the capacitor we need to put back on.
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/20%20-%20Serial%20pad%20lead%20removed.JPG?raw=true" width=50% height=50% align="center">
+
+### Resolder the capacitor back on
+
+Feed the two capacitor leads in to the through-holes we made earlier, and resolder them back into place. **Please note, the capacitor appears to be polarized so we must install it in the same orietation as we removed it, with the black arrows facing outwards towards the antenna/where the LED PCB would be installed.
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/21%20-%20Resolder%20cap.JPG?raw=true" width=50% height=50% align="center">
+
+### Re-apply thermal paste and LED PCB
+Replace the thermal paste/pads we took off from the board earlier and put the LEDs PCB back on to the power PCB by feeding through the pin headers
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/22%20-%20Reapply%20therm.JPG?raw=true" width=50% height=50% align="center">
+
+### Putting the PCB back into the housing
+Slide the full assembly with the LED PCB back into the white shell of the bulb as below
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/23%20-%20PCB%20back%20in%20housing.JPG?raw=true" width=50% height=50% align="center">
+
+### Clipping the "socket" back on and replacing the pin
+Clipping the alumnium socket back on can be a little tricky but with a little force, it should snap back in to place. **Before doing this, make sure the black wire from the PCB is bent downwards so it can make contact with the "outer ring" of the aluminum socket, and feed the red wire through the center hole of the socket before snapping back into place.**
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/24%20-%20Socket%20back%20on.JPG?raw=true" width=50% height=50% align="center">
+
+With the aluminum socket clipped back into place, you can now click the pin we took out earlier back in as well. Make sure the red wire that you fed through the center hole is a little bit of a bend so the pin being snapped back in is making clean contact the the red lead.
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/25%20-%20Pin%20back%20in%20socket.JPG?raw=true" width=50% height=50% align="center">
+
+### Putting the "dome" back on
+
+With the PCB assembly back into the housing and the aluminum socket clipped back into place, you may now put the dome/diffuser back on to the housing - it should kinda clip back on to the housing and then you can rotate it to make sure it is flush
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/26%20-%20Dome%20back%20on.JPG?raw=true" width=50% height=50% align="center">
+
+**And just like that, you now have a Sengled WiFi bulb flashed with Tasmota and ready to connect to your network!**
+
+**Plug your bulb back in, navigate on your phone or computer to available WiFi networks, and select "tasmota_xxx" - this should open a webpage where you can select your WiFi network and input the access credentials** 
+
+# Basic Tasmota configuration
+
+I wasn't planning to go into much detail with the configuring of Tasmota once installed, as there are many resources available to do so, but I do want to highlight a couple of Sengled specific configurations.
+
+## Importing the correct Sengled bulb template
+In order to tell Tasmota which pins to use to correctly control the LEDs, you must import the Sengled specific template.
+
+You can do this by following the steps below:
+
+On the web portal, go to **Configuration -> Other**
+
+In the template parameter box, delete the default text and enter the following:
+
+```{"NAME":"Sengled RGBW","GPIO":[0,0,0,0,0,0,0,0,417,416,419,418,0,0],"FLAG":0,"BASE":18}```
+
+Select the "Activate" check box and click save. This will restart your device and the colors should now be correctly controllable via the Web UI
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/29%20-%20Sengled%20Template.png?raw=true" width=50% height=50% align="center">
+
+## Enabling RGBW
+
+By default, the white LED's on your Sengled bulb (if W31-15 model as shown on this guide) will not work by default. This is easy to enable via a command in the Tasmota console.
+
+From the homepage of the Web UI on your Tasmota device, click the Console tab and paste the following line of code in the command line:
+
+```SetOption105 1```
+
+Press enter, and you should not have a white light control bar on the homepage.
+
+<img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/31%20-%20WWhite%20bar.PNG?raw=true" width=50% height=50% align="center">
