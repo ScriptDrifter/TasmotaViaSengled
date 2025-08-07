@@ -82,9 +82,9 @@ With the complete assembly removed from the housing, disconnect the LED board fr
 
 <img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/12%20-%20Full%20disasemb.JPG?raw=true" width=50% height=50% align="center">
 
-# Soldering flashing Tasmota
+# Soldering and flashing Tasmota
 ## Getting access to the serial pads
-### Removing the capcitor
+### Removing the capacitor
 In order to get the best access to the serial pads needed to flash our new firmware, I found it best to remove the capcitor in the way of the pads.
 
 <img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/13%20-%20Cap%20to%20remove.JPG?raw=true" width=50% height=50% align="center">
@@ -110,10 +110,25 @@ With the pads tinned, now solder your 5 wires into place:
 
 <img src="https://github.com/ScriptDrifter/TasmotaViaSengled/blob/main/images/18%20-%20Serial%20pads%20wleads.JPG?raw=true" width=50% height=50% align="center">
 
-You are now ready to connect your USB to UART serial cable or ESP32 dev board and begin flashing Tasmota!
+<br>
+You are now ready to connect your USB to UART serial cable or ESP32 dev board and begin installing Tasmota!
 
 ## Flashing Tasmota
 
+Once you have your wires/leads connected to the board, flashing the firmware is a pretty smooth process. Here is the pinout used to connect to your interface of choice
 
+3V3  ->  3V
+<br>
+GND  ->  GND
+<br>
+IO0  ->  GND
+<br>
+RX   ->  RX
+<br>
+TX   ->  TX
+<br>
 
+### Flashing using a USB to UART adapter
+
+If you are using a USB to UART cable, the connection process is pretty straightfoward following the pinout diagram above - **just make sure your adapter supports 3.3V logic output and not 5V, if using 5V, you will need to use a level shifter!** However, 
 
